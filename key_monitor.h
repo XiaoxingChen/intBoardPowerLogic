@@ -6,7 +6,8 @@ typedef enum
 	RELEASED,
 	PRESSED,
 	RELEASING,
-	PRESSING
+	PRESSING,
+	NO_SUCH_KEY
 }key_state;
 
 enum KEY_ENUM{

@@ -46,6 +46,10 @@ key_state key_get_raw_data(int key_index)
 {
 	uint8_t key_gpio = key_array[key_index].KEY_GPIO_X_;
 	uint8_t key_pin = key_array[key_index].KEY_GPIO_PIN_;
+
+	if(key_index >= TOTAL_KEY_NUM)
+		return 0;
+
 	if(GPIO_ReadInputDataBit(key_gpio, key_pin) == key_array[key_index].IS_PRESSED)
 	{
 		return PRESSED;
@@ -63,14 +67,26 @@ key_state key_get_raw_data(int key_index)
   */
 key_state key_get_data(int key_index)
 {
+	if(key_index >= TOTAL_KEY_NUM)
+		return NO_SUCH_KEY;
+
 	return key_array[key_index].key_state_;
 }
 
+/**
+  * @brief  judge if key is pressed for a definited time
+  * @param  key_index 
+  * @retval 
+  */
 uint8_t key_is_long_pressed(int key_index)
 {
 	uint8_t ret;
+
+	if(key_index >= TOTAL_KEY_NUM)
+		return 0;
+
 	ret = (key_array[key_index].key_state_ == PRESSED 
-			&& timer_get_time(&key_array[key_index].timer_) > 2000);
+			&& timer_get_time(&key_array[key_index].timer_) > 5000);
 	return (ret);
 }
 

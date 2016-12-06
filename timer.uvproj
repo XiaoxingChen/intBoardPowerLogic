@@ -388,6 +388,11 @@
               <FileType>1</FileType>
               <FilePath>.\key_monitor.c</FilePath>
             </File>
+            <File>
+              <FileName>logic_pin.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\logic_pin.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
