@@ -389,9 +389,9 @@
               <FilePath>.\key_monitor.c</FilePath>
             </File>
             <File>
-              <FileName>logic_pin.c</FileName>
+              <FileName>logic_out.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\logic_pin.c</FilePath>
+              <FilePath>.\logic_out.c</FilePath>
             </File>
           </Files>
         </Group>
