@@ -26,8 +26,8 @@ enum BRD_STATE_TYPE
 	BS_WORKING,
 	BS_SHUTDOWN_PRESSING,
 	BS_SHUTTING_DOWN,
-	BS_STANDBY,
-	BS_RELEASE_BRAKE
+	BS_STANDBY/*,
+	BS_RELEASE_BRAKE*/
 };
 
 /**
@@ -54,20 +54,21 @@ int confirm_wake_type()
 //        launch_board();
 				return 1;
     }
-		else if(PRESSED == key_get_raw_data(KEY_BRAKE))
-    {
-        virtual_shutdown_key = 0xFF;
-        virtual_launch_key = 0xFF;
-        disable_battery();
-				shutdown_board();
-				return 2;
-    }
+//		else if(PRESSED == key_get_raw_data(KEY_BRAKE))
+//    {
+//        virtual_shutdown_key = 0xFF;
+//        virtual_launch_key = 0xFF;
+//        disable_battery();
+//				shutdown_board();
+//				return 2;
+//    }
 		/* when battery key is not used */
 		/* when DC socket is used */
 		else
     {
 			virtual_shutdown_key = 0xFF;
 			virtual_launch_key = 0xFF;
+			disable_battery();
 			shutdown_board();
 			return 0;
     }
@@ -95,11 +96,11 @@ void power_manager_run()
 				/* switch state */
 				board_state = BS_LAUNCH_PRESSING;
 			}
-			/* brake release */
-			else if(2 == confirm_wake_type())
-			{
-				board_state = BS_RELEASE_BRAKE;
-			}
+//			/* brake release */
+//			else if(2 == confirm_wake_type())
+//			{
+//				board_state = BS_RELEASE_BRAKE;
+//			}
 			break;
 		}
 		case (BS_LAUNCH_PRESSING):
@@ -127,6 +128,14 @@ void power_manager_run()
 				
 				/* switch state */
 				board_state = BS_SHUTDOWN_PRESSING;
+			}
+			
+			/* shutdown from PC desktop */
+			if(RELEASED == key_get_data(KEY_IS_PC_LAUNCH))
+			{
+				shutdown_board();
+				disable_battery();
+				board_state = BS_STANDBY;
 			}
 			break;
 		}
@@ -175,15 +184,15 @@ void power_manager_run()
 			break;
 		}
 		
-		case (BS_RELEASE_BRAKE):
-		{
-			if(RELEASED == key_get_data(KEY_BRAKE))
-			{
-				disable_battery();
-				board_state = BS_STANDBY;
-			}
-			break;
-		}
+//		case (BS_RELEASE_BRAKE):
+//		{
+//			if(RELEASED == key_get_data(KEY_BRAKE))
+//			{
+//				disable_battery();
+//				board_state = BS_STANDBY;
+//			}
+//			break;
+//		}
 		
 		default:
 			break;
