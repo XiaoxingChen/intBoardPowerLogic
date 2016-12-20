@@ -1,131 +1,140 @@
 
-/*------------------------------------------------------------------*/
-/* --- STC MCU International Limited -------------------------------*/
-/* --- STC 1T Series MCU RC Demo -----------------------------------*/
-/* --- Mobile: (86)13922805190 -------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ---------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ---------------------*/
-/* --- Web: www.GXWMCU.com -----------------------------------------*/
-/* --- QQ:  800003751 ----------------------------------------------*/
-/* If you want to use the program or the program referenced in the  */
-/* article, please specify in which data and procedures from STC    */
-/*------------------------------------------------------------------*/
-
-/*************	¹¦ÄÜËµÃ÷	**************
-
-±¾ÎÄ¼þÎªSTC15xxxÏµÁÐµÄ¶¨Ê±Æ÷³õÊ¼»¯ºÍÖÐ¶Ï³ÌÐò,ÓÃ»§¿ÉÒÔÔÚÕâ¸öÎÄ¼þÖÐÐÞ¸Ä×Ô¼ºÐèÒªµÄÖÐ¶Ï³ÌÐò.
-
-
-******************************************/
-
 #include	"timer.h"
 
-/********************* Timer0ÖÐ¶Ïº¯Êý************************/
+/********************* Timer0ï¿½Ð¶Ïºï¿½ï¿½ï¿½************************/
 void timer0_int (void) interrupt TIMER0_VECTOR
 {
 }
 
-/********************* Timer2ÖÐ¶Ïº¯Êý************************/
+/********************* Timer2ï¿½Ð¶Ïºï¿½ï¿½ï¿½************************/
 
 
 //========================================================================
-// º¯Êý: u8	Timer_Inilize(u8 TIM, TIM_InitTypeDef *TIMx)
-// ÃèÊö: ¶¨Ê±Æ÷³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: TIMx: ½á¹¹²ÎÊý,Çë²Î¿¼timer.hÀïµÄ¶¨Òå.
-// ·µ»Ø: ³É¹¦·µ»Ø0, ¿Õ²Ù×÷·µ»Ø1,´íÎó·µ»Ø2.
-// °æ±¾: V1.0, 2012-10-22
+// ï¿½ï¿½ï¿½ï¿½: u8	Timer_Inilize(u8 TIM, TIM_InitTypeDef *TIMx)
+// ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+// ï¿½ï¿½ï¿½ï¿½: TIMx: ï¿½á¹¹ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Î¿ï¿½timer.hï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½.
+// ï¿½ï¿½ï¿½ï¿½: ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½0, ï¿½Õ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1,ï¿½ï¿½ï¿½ó·µ»ï¿½2.
+// ï¿½æ±¾: V1.0, 2012-10-22
 //========================================================================
 u8	Timer_Inilize(u8 TIM, TIM_InitTypeDef *TIMx)
 {
-	if(TIM > Timer2)	return 1;	//¿Õ²Ù×÷
+	if(TIM > Timer2)	return 1;	//ï¿½Õ²ï¿½ï¿½ï¿½
 
 	if(TIM == Timer0)
 	{
-		TR0 = 0;		//Í£Ö¹¼ÆÊý
-		if(TIMx->TIM_Interrupt == ENABLE)		ET0 = 1;	//ÔÊÐíÖÐ¶Ï
-		else									ET0 = 0;	//½ûÖ¹ÖÐ¶Ï
-		if(TIMx->TIM_Polity == PolityHigh)		PT0 = 1;	//¸ßÓÅÏÈ¼¶ÖÐ¶Ï
-		else									PT0 = 0;	//µÍÓÅÏÈ¼¶ÖÐ¶Ï
-		if(TIMx->TIM_Mode >  TIM_16BitAutoReloadNoMask)	return 2;	//´íÎó
-		TMOD = (TMOD & ~0x03) | TIMx->TIM_Mode;	//¹¤×÷Ä£Ê½,0: 16Î»×Ô¶¯ÖØ×°, 1: 16Î»¶¨Ê±/¼ÆÊý, 2: 8Î»×Ô¶¯ÖØ×°, 3: 16Î»×Ô¶¯ÖØ×°, ²»¿ÉÆÁ±ÎÖÐ¶Ï
+		TR0 = 0;		//Í£Ö¹ï¿½ï¿½ï¿½ï¿½
+		if(TIMx->TIM_Interrupt == ENABLE)		ET0 = 1;	//ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+		else									ET0 = 0;	//ï¿½ï¿½Ö¹ï¿½Ð¶ï¿½
+		if(TIMx->TIM_Polity == PolityHigh)		PT0 = 1;	//ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½Ð¶ï¿½
+		else									PT0 = 0;	//ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½Ð¶ï¿½
+		if(TIMx->TIM_Mode >  TIM_16BitAutoReloadNoMask)	return 2;	//ï¿½ï¿½ï¿½ï¿½
+		TMOD = (TMOD & ~0x03) | TIMx->TIM_Mode;	//ï¿½ï¿½ï¿½ï¿½Ä£Ê½,0: 16Î»ï¿½Ô¶ï¿½ï¿½ï¿½×°, 1: 16Î»ï¿½ï¿½Ê±/ï¿½ï¿½ï¿½ï¿½, 2: 8Î»ï¿½Ô¶ï¿½ï¿½ï¿½×°, 3: 16Î»ï¿½Ô¶ï¿½ï¿½ï¿½×°, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
 		if(TIMx->TIM_ClkSource == TIM_CLOCK_12T)	AUXR &= ~0x80;	//12T
 		if(TIMx->TIM_ClkSource == TIM_CLOCK_1T)		AUXR |=  0x80;	//1T
-		if(TIMx->TIM_ClkSource == TIM_CLOCK_Ext)	TMOD |=  0x04;	//¶ÔÍâ¼ÆÊý»ò·ÖÆµ
-		else										TMOD &= ~0x04;	//¶¨Ê±
-		if(TIMx->TIM_ClkOut == ENABLE)	INT_CLKO |=  0x01;	//Êä³öÊ±ÖÓ
-		else							INT_CLKO &= ~0x01;	//²»Êä³öÊ±ÖÓ
+		if(TIMx->TIM_ClkSource == TIM_CLOCK_Ext)	TMOD |=  0x04;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµ
+		else										TMOD &= ~0x04;	//ï¿½ï¿½Ê±
+		if(TIMx->TIM_ClkOut == ENABLE)	INT_CLKO |=  0x01;	//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+		else							INT_CLKO &= ~0x01;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 		
 		TH0 = (u8)(TIMx->TIM_Value >> 8);
 		TL0 = (u8)TIMx->TIM_Value;
-		if(TIMx->TIM_Run == ENABLE)	TR0 = 1;	//¿ªÊ¼ÔËÐÐ
-		return	0;		//³É¹¦
+		if(TIMx->TIM_Run == ENABLE)	TR0 = 1;	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+		return	0;		//ï¿½É¹ï¿½
 	}
 
 	if(TIM == Timer1)
 	{
-		TR1 = 0;		//Í£Ö¹¼ÆÊý
-		if(TIMx->TIM_Interrupt == ENABLE)		ET1 = 1;	//ÔÊÐíÖÐ¶Ï
-		else									ET1 = 0;	//½ûÖ¹ÖÐ¶Ï
-		if(TIMx->TIM_Polity == PolityHigh)		PT1 = 1;	//¸ßÓÅÏÈ¼¶ÖÐ¶Ï
-		else									PT1 = 0;	//µÍÓÅÏÈ¼¶ÖÐ¶Ï
-		if(TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask)	return 2;	//´íÎó
-		TMOD = (TMOD & ~0x30) | TIMx->TIM_Mode;	//¹¤×÷Ä£Ê½,0: 16Î»×Ô¶¯ÖØ×°, 1: 16Î»¶¨Ê±/¼ÆÊý, 2: 8Î»×Ô¶¯ÖØ×°
+		TR1 = 0;		//Í£Ö¹ï¿½ï¿½ï¿½ï¿½
+		if(TIMx->TIM_Interrupt == ENABLE)		ET1 = 1;	//ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+		else									ET1 = 0;	//ï¿½ï¿½Ö¹ï¿½Ð¶ï¿½
+		if(TIMx->TIM_Polity == PolityHigh)		PT1 = 1;	//ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½Ð¶ï¿½
+		else									PT1 = 0;	//ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½Ð¶ï¿½
+		if(TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask)	return 2;	//ï¿½ï¿½ï¿½ï¿½
+		TMOD = (TMOD & ~0x30) | TIMx->TIM_Mode;	//ï¿½ï¿½ï¿½ï¿½Ä£Ê½,0: 16Î»ï¿½Ô¶ï¿½ï¿½ï¿½×°, 1: 16Î»ï¿½ï¿½Ê±/ï¿½ï¿½ï¿½ï¿½, 2: 8Î»ï¿½Ô¶ï¿½ï¿½ï¿½×°
 		if(TIMx->TIM_ClkSource == TIM_CLOCK_12T)	AUXR &= ~0x40;	//12T
 		if(TIMx->TIM_ClkSource == TIM_CLOCK_1T)		AUXR |=  0x40;	//1T
-		if(TIMx->TIM_ClkSource == TIM_CLOCK_Ext)	TMOD |=  0x40;	//¶ÔÍâ¼ÆÊý»ò·ÖÆµ
-		else										TMOD &= ~0x40;	//¶¨Ê±
-		if(TIMx->TIM_ClkOut == ENABLE)	INT_CLKO |=  0x02;	//Êä³öÊ±ÖÓ
-		else							INT_CLKO &= ~0x02;	//²»Êä³öÊ±ÖÓ
+		if(TIMx->TIM_ClkSource == TIM_CLOCK_Ext)	TMOD |=  0x40;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµ
+		else										TMOD &= ~0x40;	//ï¿½ï¿½Ê±
+		if(TIMx->TIM_ClkOut == ENABLE)	INT_CLKO |=  0x02;	//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+		else							INT_CLKO &= ~0x02;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 		
 		TH1 = (u8)(TIMx->TIM_Value >> 8);
 		TL1 = (u8)TIMx->TIM_Value;
-		if(TIMx->TIM_Run == ENABLE)	TR1 = 1;	//¿ªÊ¼ÔËÐÐ
-		return	0;		//³É¹¦
+		if(TIMx->TIM_Run == ENABLE)	TR1 = 1;	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+		return	0;		//ï¿½É¹ï¿½
 	}
 
-	if(TIM == Timer2)		//Timer2,¹Ì¶¨Îª16Î»×Ô¶¯ÖØ×°, ÖÐ¶ÏÎÞÓÅÏÈ¼¶
+	if(TIM == Timer2)		//Timer2,ï¿½Ì¶ï¿½Îª16Î»ï¿½Ô¶ï¿½ï¿½ï¿½×°, ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½
 	{
-		AUXR &= ~(1<<4);	//Í£Ö¹¼ÆÊý
-		if(TIMx->TIM_Interrupt == ENABLE)			IE2  |=  (1<<2);	//ÔÊÐíÖÐ¶Ï
-		else										IE2  &= ~(1<<2);	//½ûÖ¹ÖÐ¶Ï
+		AUXR &= ~(1<<4);	//Í£Ö¹ï¿½ï¿½ï¿½ï¿½
+		if(TIMx->TIM_Interrupt == ENABLE)			IE2  |=  (1<<2);	//ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+		else										IE2  &= ~(1<<2);	//ï¿½ï¿½Ö¹ï¿½Ð¶ï¿½
 		if(TIMx->TIM_ClkSource >  TIM_CLOCK_Ext)	return 2;
 		if(TIMx->TIM_ClkSource == TIM_CLOCK_12T)	AUXR &= ~(1<<2);	//12T
 		if(TIMx->TIM_ClkSource == TIM_CLOCK_1T)		AUXR |=  (1<<2);	//1T
-		if(TIMx->TIM_ClkSource == TIM_CLOCK_Ext)	AUXR |=  (1<<3);	//¶ÔÍâ¼ÆÊý»ò·ÖÆµ
-		else										AUXR &= ~(1<<3);	//¶¨Ê±
-		if(TIMx->TIM_ClkOut == ENABLE)	INT_CLKO |=  0x04;	//Êä³öÊ±ÖÓ
-		else							INT_CLKO &= ~0x04;	//²»Êä³öÊ±ÖÓ
+		if(TIMx->TIM_ClkSource == TIM_CLOCK_Ext)	AUXR |=  (1<<3);	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµ
+		else										AUXR &= ~(1<<3);	//ï¿½ï¿½Ê±
+		if(TIMx->TIM_ClkOut == ENABLE)	INT_CLKO |=  0x04;	//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+		else							INT_CLKO &= ~0x04;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 
 		TH2 = (u8)(TIMx->TIM_Value >> 8);
 		TL2 = (u8)TIMx->TIM_Value;
-		if(TIMx->TIM_Run == ENABLE)	AUXR |=  (1<<4);	//¿ªÊ¼ÔËÐÐ
-		return	0;		//³É¹¦
+		if(TIMx->TIM_Run == ENABLE)	AUXR |=  (1<<4);	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+		return	0;		//ï¿½É¹ï¿½
 	}
-	return 2;	//´íÎó
+	return 2;	//ï¿½ï¿½ï¿½ï¿½
 }
 
 static volatile uint16_t base_time_ = 0;
 
+/**
+  * @brief  judge if timer is time up since resetted
+  * @param  this pointer
+	* @retval 0: not time up
+	* @retval 1: is time up
+  */
 uint8_t timer_is_timeup(CTimer* this)
 {
 	return(base_time_ - this->reset_time_ > this->period_);
 }
 
+/**
+  * @brief  reset timer
+  * @param  this pointer
+	* @retval None
+  */
 void timer_reset(CTimer* this)
 {
 	this->reset_time_ = base_time_;
 }
 
+/**
+  * @brief  set the period of timer
+	* @param  this: this pointer
+	* @param  base_tick: period evaluated by ticks
+	* @retval None
+  */
 void timer_set_period(CTimer* this, uint16_t base_tick)
 {
 	this->period_ = base_tick;
 }
 
+/**
+  * @brief  get time of a timer
+	* @param  this: this pointer
+	* @retval ticks since timer resetted
+  */
 uint16_t timer_get_time(CTimer* this)
 {
 	return (base_time_ - this->reset_time_);
 }
 
+/**
+  * @brief  delay some ms
+	* @param  how many ms
+	* @retval None
+	* @Note: here regard base tick 1ms
+  */
 void delay_ms(uint16_t delay_time)
 {
 	int32_t enter_time = base_time_;
@@ -141,5 +150,4 @@ void timer1_int (void) interrupt TIMER1_VECTOR
 void timer2_int (void) interrupt TIMER2_VECTOR
 {
 	base_time_++;
-//	P14 = ~P14;
 }

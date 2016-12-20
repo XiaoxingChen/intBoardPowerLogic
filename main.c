@@ -1,16 +1,3 @@
-
-/*------------------------------------------------------------------*/
-/* --- STC MCU International Limited -------------------------------*/
-/* --- STC 1T Series MCU RC Demo -----------------------------------*/
-/* --- Mobile: (86)13922805190 -------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ---------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ---------------------*/
-/* --- Web: www.GXWMCU.com -----------------------------------------*/
-/* --- QQ:  800003751 ----------------------------------------------*/
-/* If you want to use the program or the program referenced in the  */
-/* article, please specify in which data and procedures from STC    */
-/*------------------------------------------------------------------*/
-
 #include	"config.h"
 #include	"timer.h"
 #include	"GPIO.h"
@@ -50,18 +37,6 @@ void main(void)
 	{
 		key_monitor_run();
 		power_manager_run();
-		
-		
-//		if(key_is_long_pressed(KEY_LAUNCH))
-//		{
-//			shutdown_board();
-//			disable_battery();
-//		}
-//		else	if(PRESSED == key_get_data(KEY_LAUNCH))
-//		{
-//			launch_board();
-//			enable_battery();
-//		}
 		
 	}
 }

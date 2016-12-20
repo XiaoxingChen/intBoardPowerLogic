@@ -10,12 +10,6 @@ static uint8_t virtual_shutdown_key = 0xFF;
 /* either KEY_HY_ON or KEY_LAUNCH can launch the robot */
 static uint8_t virtual_launch_key = 0xFF;
 
-/* enable shutdown detect */
-static uint8_t is_shutdown_key_enable = 0;
-
-/* enable launch detect */
-static uint8_t is_launch_key_enable = 1;
-
 /* shutdown state timer */
 CTimer shutdownTimer;
 static uint8_t is_logic_shuttingdown = 0;
@@ -26,8 +20,7 @@ enum BRD_STATE_TYPE
 	BS_WORKING,
 	BS_SHUTDOWN_PRESSING,
 	BS_SHUTTING_DOWN,
-	BS_STANDBY/*,
-	BS_RELEASE_BRAKE*/
+	BS_STANDBY
 };
 
 /**
@@ -35,7 +28,6 @@ enum BRD_STATE_TYPE
   * @param  None
 	* @retval 0: nothing happend 
 	*					1: launch pressed 
-	*					2: release brake
   * @note   call this function after powerup as soon as possible
   */
 int confirm_wake_type()
@@ -54,14 +46,6 @@ int confirm_wake_type()
 //        launch_board();
 				return 1;
     }
-//		else if(PRESSED == key_get_raw_data(KEY_BRAKE))
-//    {
-//        virtual_shutdown_key = 0xFF;
-//        virtual_launch_key = 0xFF;
-//        disable_battery();
-//				shutdown_board();
-//				return 2;
-//    }
 		/* when battery key is not used */
 		/* when DC socket is used */
 		else
@@ -96,11 +80,6 @@ void power_manager_run()
 				/* switch state */
 				board_state = BS_LAUNCH_PRESSING;
 			}
-//			/* brake release */
-//			else if(2 == confirm_wake_type())
-//			{
-//				board_state = BS_RELEASE_BRAKE;
-//			}
 			break;
 		}
 		case (BS_LAUNCH_PRESSING):
@@ -183,16 +162,6 @@ void power_manager_run()
 			}
 			break;
 		}
-		
-//		case (BS_RELEASE_BRAKE):
-//		{
-//			if(RELEASED == key_get_data(KEY_BRAKE))
-//			{
-//				disable_battery();
-//				board_state = BS_STANDBY;
-//			}
-//			break;
-//		}
 		
 		default:
 			break;
