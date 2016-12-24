@@ -36,14 +36,18 @@ int confirm_wake_type()
     {
 			virtual_shutdown_key = KEY_LAUNCH;
 			virtual_launch_key = KEY_LAUNCH;
-			launch_board();
 			return 1;
     }
 		else if(PRESSED == key_get_raw_data(KEY_HY_ON))
     {
         virtual_shutdown_key = KEY_HY_OFF;
         virtual_launch_key = KEY_HY_ON;
-//        launch_board();
+				return 1;
+    }
+		else if(PRESSED == key_get_raw_data(KEY_ON_BRD))
+    {
+        virtual_shutdown_key = KEY_ON_BRD;
+        virtual_launch_key = KEY_ON_BRD;
 				return 1;
     }
 		/* when battery key is not used */
@@ -73,6 +77,7 @@ void power_manager_run()
 			if(1 == confirm_wake_type())
 			{
 				launch_board();
+				enable_battery();
 				
 				/* forwarding virtual shutdown key to PC */
 				pc_en_line_low();
@@ -127,6 +132,7 @@ void power_manager_run()
 				shutdown_board();
 				disable_battery();
 			}
+			
 			/* shutdown key short press */
 			else if(RELEASED == key_get_data(virtual_shutdown_key))
 			{

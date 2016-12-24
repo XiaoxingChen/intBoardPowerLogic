@@ -17,6 +17,7 @@ enum KEY_ENUM{
 	KEY_DCIN,
 	KEY_HY_ON,
 	KEY_HY_OFF,
+	KEY_ON_BRD,
 	TOTAL_KEY_NUM
 };
 

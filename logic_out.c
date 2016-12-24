@@ -9,8 +9,9 @@ void logic_pin_config(void)
 	GPIO_InitStructure.Mode = GPIO_OUT_PP;		
 	GPIO_Inilize(BATT_EN_GPIO,&GPIO_InitStructure);	
 	
+	/* Board_EN should be Push pull type in V0.2Board */
 	GPIO_InitStructure.Pin  = BRD_nEN_PIN;		
-	GPIO_InitStructure.Mode = GPIO_OUT_OD;		
+	GPIO_InitStructure.Mode = GPIO_OUT_PP;		
 	GPIO_Inilize(BRD_nEN_GPIO,&GPIO_InitStructure);
 	
 	GPIO_InitStructure.Pin  = PC_EN_PIN;		

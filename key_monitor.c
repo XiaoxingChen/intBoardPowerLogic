@@ -20,7 +20,8 @@ key_type key_array[TOTAL_KEY_NUM] =
 	{GPIO_P5, GPIO_Pin_5, 1, RELEASED}, //KEY_BRAKE
 	{GPIO_P1, GPIO_Pin_1, 1, RELEASED}, //KEY_DCIN
 	{GPIO_P1, GPIO_Pin_0, 1, RELEASED}, //KEY_HY_ON
-	{GPIO_P3, GPIO_Pin_7, 0, RELEASED}  //KEY_HY_OFF
+	{GPIO_P3, GPIO_Pin_7, 0, RELEASED}, //KEY_HY_OFF
+	{GPIO_P1, GPIO_Pin_5, 0, RELEASED}  //KEY_ON_BRD
 }; 
 
 void key_init()
