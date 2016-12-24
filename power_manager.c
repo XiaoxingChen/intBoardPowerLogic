@@ -32,7 +32,16 @@ enum BRD_STATE_TYPE
   */
 int confirm_wake_type()
 {
-    if(PRESSED == key_get_raw_data(KEY_LAUNCH))
+    if(PRESSED == key_get_raw_data(KEY_DCIN))
+    {
+			virtual_shutdown_key = KEY_ON_BRD;
+			virtual_launch_key = KEY_ON_BRD;
+			if(PRESSED == key_get_raw_data(KEY_ON_BRD))
+				return 1;
+			else
+				return 0;
+    }
+		else if(PRESSED == key_get_raw_data(KEY_LAUNCH))
     {
 			virtual_shutdown_key = KEY_LAUNCH;
 			virtual_launch_key = KEY_LAUNCH;
@@ -40,18 +49,11 @@ int confirm_wake_type()
     }
 		else if(PRESSED == key_get_raw_data(KEY_HY_ON))
     {
-        virtual_shutdown_key = KEY_HY_OFF;
-        virtual_launch_key = KEY_HY_ON;
-				return 1;
-    }
-		else if(PRESSED == key_get_raw_data(KEY_ON_BRD))
-    {
-        virtual_shutdown_key = KEY_ON_BRD;
-        virtual_launch_key = KEY_ON_BRD;
-				return 1;
+			virtual_shutdown_key = KEY_HY_OFF;
+			virtual_launch_key = KEY_HY_ON;
+			return 1;
     }
 		/* when battery key is not used */
-		/* when DC socket is used */
 		else
     {
 			virtual_shutdown_key = 0xFF;

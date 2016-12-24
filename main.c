@@ -30,7 +30,6 @@ void main(void)
 	Timer_config();
 	key_init();
 	EA = 1;
-	launch_board();
 	enable_battery();	
 	
 	while (1)
