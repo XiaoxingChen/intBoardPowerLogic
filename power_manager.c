@@ -86,6 +86,8 @@ void power_manager_run()
 				
 				/* switch state */
 				board_state = BS_LAUNCH_PRESSING;
+				
+				delay_ms(500);
 			}
 			break;
 		}

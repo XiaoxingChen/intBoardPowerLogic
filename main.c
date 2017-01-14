@@ -22,7 +22,6 @@ void	Timer_config(void)
 	Timer_Inilize(Timer2,&TIM_InitStructure);				
 }
 
-
 void main(void)
 {
 	logic_pin_config();
@@ -36,7 +35,6 @@ void main(void)
 	{
 		key_monitor_run();
 		power_manager_run();
-		
 	}
 }
 
