@@ -87,7 +87,7 @@ uint8_t key_is_long_pressed(int key_index)
 		return 0;
 
 	ret = (key_array[key_index].key_state_ == PRESSED 
-			&& timer_get_time(&key_array[key_index].timer_) > 5000);
+			&& timer_get_time(&key_array[key_index].timer_) > 10000);
 	return (ret);
 }
 

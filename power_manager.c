@@ -166,9 +166,12 @@ void power_manager_run()
 			
 			if(timer_is_timeup(&shutdownTimer) || RELEASED == key_get_data(KEY_IS_PC_LAUNCH))
 			{
-				shutdown_board();
-				disable_battery();
-				board_state = BS_STANDBY;
+				if(RELEASED == key_get_data(virtual_shutdown_key))
+				{
+					shutdown_board();
+					disable_battery();
+					board_state = BS_STANDBY;
+				}
 			}
 			break;
 		}
