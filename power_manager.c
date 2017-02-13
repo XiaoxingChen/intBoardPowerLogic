@@ -11,6 +11,9 @@ static uint8_t virtual_shutdown_key = 0xFF;
 static uint8_t virtual_launch_key = 0xFF;
 
 /* shutdown state timer */
+
+#define LONGPRESS_FORCE_SHUTDOWN	0
+
 CTimer shutdownTimer;
 static uint8_t is_logic_shuttingdown = 0;
 
@@ -131,14 +134,16 @@ void power_manager_run()
 		case (BS_SHUTDOWN_PRESSING):
 		{
 			/* shutdown key long press */
+#if LONGPRESS_FORCE_SHUTDOWN
 			if(key_is_long_pressed(virtual_shutdown_key))
 			{
 				shutdown_board();
 				disable_battery();
 			}
+#endif
 			
 			/* shutdown key short press */
-			else if(RELEASED == key_get_data(virtual_shutdown_key))
+			if(RELEASED == key_get_data(virtual_shutdown_key))
 			{
 				/* forwarding virtual shutdown key to PC */
 				pc_en_line_high();
@@ -158,11 +163,13 @@ void power_manager_run()
 		case (BS_SHUTTING_DOWN):
 		{
 			/* shutdown key long press is still effective*/
+#if LONGPRESS_FORCE_SHUTDOWN
 			if(key_is_long_pressed(virtual_shutdown_key))
 			{
 				shutdown_board();
 				disable_battery();
 			}
+#endif
 			
 			if(timer_is_timeup(&shutdownTimer) || RELEASED == key_get_data(KEY_IS_PC_LAUNCH))
 			{
