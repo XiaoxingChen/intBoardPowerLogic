@@ -114,11 +114,8 @@ void power_manager_run()
 				timer_set_period(&shutdownTimer, 40000);//40s
         timer_reset(&shutdownTimer);
 				
-				/* forwarding virtual shutdown key to PC */
-				pc_en_line_low();
-				
 				/* switch state */
-				board_state = BS_SHUTDOWN_PRESSING;
+				board_state = BS_SHUTTING_DOWN;
 			}
 			
 			/* shutdown from PC desktop */
@@ -126,36 +123,9 @@ void power_manager_run()
 			{
 				shutdown_board();
 				disable_battery();
-				board_state = BS_STANDBY;
-			}
-			break;
-		}
-		
-		case (BS_SHUTDOWN_PRESSING):
-		{
-			/* shutdown key long press */
-#if LONGPRESS_FORCE_SHUTDOWN
-			if(key_is_long_pressed(virtual_shutdown_key))
-			{
-				shutdown_board();
-				disable_battery();
-			}
-#endif
-			
-			/* shutdown key short press */
-			if(RELEASED == key_get_data(virtual_shutdown_key))
-			{
-				/* forwarding virtual shutdown key to PC */
-				pc_en_line_high();
-				
-				if(RELEASED == key_get_data(KEY_IS_PC_LAUNCH))
-				{ /* means PC is shutted down */
-					shutdown_board();
-					disable_battery();
-					board_state = BS_STANDBY;
-				}else //IS_PC_LAUNCH
+				if(RELEASED == key_get_data(virtual_shutdown_key))
 				{
-					board_state = BS_SHUTTING_DOWN;
+					board_state = BS_STANDBY;
 				}
 			}
 			break;
@@ -171,15 +141,26 @@ void power_manager_run()
 			}
 #endif
 			
+			if(RELEASED == key_get_data(virtual_shutdown_key))
+			{
+				pc_en_line_high();
+			}
+			else if(PRESSED == key_get_data(virtual_shutdown_key))
+			{
+				pc_en_line_low();
+			}
+			
 			if(timer_is_timeup(&shutdownTimer) || RELEASED == key_get_data(KEY_IS_PC_LAUNCH))
 			{
+				shutdown_board();
+				disable_battery();
 				if(RELEASED == key_get_data(virtual_shutdown_key))
 				{
-					shutdown_board();
-					disable_battery();
 					board_state = BS_STANDBY;
 				}
 			}
+			
+			
 			break;
 		}
 		
