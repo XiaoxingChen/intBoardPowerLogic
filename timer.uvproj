@@ -10,6 +10,7 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x0</ToolsetNumber>
       <ToolsetName>MCS-51</ToolsetName>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>AT89C55</Device>
@@ -392,6 +393,16 @@
               <FileName>logic_out.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\logic_out.c</FilePath>
+            </File>
+            <File>
+              <FileName>heart_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\heart_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>watchdog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\watchdog.c</FilePath>
             </File>
           </Files>
         </Group>

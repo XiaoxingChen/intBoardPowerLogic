@@ -49,3 +49,6 @@ Temporary Items
 /timer.uvopt
 /timer.uvgui.chenxx
 !/list/*.hex
+/.vscode/
+
+*.uvgui.*

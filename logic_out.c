@@ -17,6 +17,7 @@ void logic_pin_config(void)
 	GPIO_InitStructure.Pin  = PC_EN_PIN;		
 	GPIO_InitStructure.Mode = GPIO_OUT_OD;		
 	GPIO_Inilize(PC_EN_GPIO, &GPIO_InitStructure);
+
 }
 
 //end of file

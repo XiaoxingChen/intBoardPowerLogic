@@ -5,7 +5,8 @@
 #include "STC15Fxxxx.H"
 #include "logic_out.h"
 #include "power_manager.h"
-
+#include "heart_led.h"
+#include "watchdog.h"
 
 /************************ Timer Config****************************/
 void	Timer_config(void)
@@ -28,6 +29,8 @@ void main(void)
 	confirm_wake_type();
 	Timer_config();
 	key_init();
+	initial_heart_led();
+	init_watchdog();
 	EA = 1;
 	enable_battery();	
 	
@@ -35,8 +38,7 @@ void main(void)
 	{
 		key_monitor_run();
 		power_manager_run();
+		heart_led_run();
+		service_watchdog();
 	}
 }
-
-
-
