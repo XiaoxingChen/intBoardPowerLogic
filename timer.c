@@ -2,9 +2,9 @@
 #include	"timer.h"
 
 /********************* Timer0�жϺ���************************/
-void timer0_int (void) interrupt TIMER0_VECTOR
-{
-}
+//void timer0_int (void) interrupt TIMER0_VECTOR
+//{
+//}
 
 /********************* Timer2�жϺ���************************/
 
@@ -142,6 +142,11 @@ void delay_ms(uint16_t delay_time)
 }
 
 /********************* timer1 ISR************************/
+void timer0_int (void) interrupt TIMER0_VECTOR
+{
+	base_time_++;
+}
+
 void timer1_int (void) interrupt TIMER1_VECTOR
 {
 	
@@ -149,5 +154,5 @@ void timer1_int (void) interrupt TIMER1_VECTOR
 
 void timer2_int (void) interrupt TIMER2_VECTOR
 {
-	base_time_++;
+//	base_time_++;
 }
